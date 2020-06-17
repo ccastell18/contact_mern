@@ -1,0 +1,20 @@
+{
+  "name": "contact_mern",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ccastell18/contact_mern.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ccastell18/contact_mern/issues"
+  },
+  "homepage": "https://github.com/ccastell18/contact_mern#readme"
+}
