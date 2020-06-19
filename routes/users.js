@@ -1,16 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const config = require('config');
 const { check, validationResult } = require('express-validator');
 
 const User = require('../model/User');
-const { genSalt } = require('bcrypt');
 
 //route Post api/users
 //desc Register user
 //access
 router.post(
   '/',
+  // validation for information
   [
     check('name', 'Please add a name').not().isEmpty(),
     check('email', 'Please include a valid email').isEmail(),
@@ -31,6 +33,7 @@ router.post(
       if (user) {
         return res.status(400).json({ msg: 'User already exists' });
       }
+      //create new user using User Schema and save to db
       user = new User({
         name,
         email,
@@ -43,7 +46,24 @@ router.post(
       user.password = await bcrypt.hash(password, salt);
 
       await user.save();
-      res.send('User saved');
+      //payload to get JWT
+      const payload = {
+        user: {
+          id: user.id,
+        },
+      };
+      //get token by signing for it using Secret in config and callback
+      jwt.sign(
+        payload,
+        config.get('jwtSecret'),
+        {
+          expiresIn: 36000,
+        },
+        (err, token) => {
+          if (err) throw err;
+          res.json({ token });
+        }
+      );
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');

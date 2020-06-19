@@ -1,3 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://chris123:chris123@mern-contact-oa3nk.mongodb.net/<dbname>?retryWrites=true&w=majority"
+  "mongoURI": "mongodb+srv://chris123:chris123@mern-contact-oa3nk.mongodb.net/<dbname>?retryWrites=true&w=majority",
+  "jwtSecret": "secret"
 }
