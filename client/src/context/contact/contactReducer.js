@@ -16,6 +16,16 @@ export default (state, action) => {
         //cannot just add state, must call current state and add to the array.
         contacts: [...state.contacts, action.payload],
       };
+    case DELETE_CONTACT: {
+      return {
+        ...state,
+        //use filter to remove id. Filter takes in a function
+        //returns all ids that are not from the ContactState method.
+        contacts: state.contacts.filter(
+          (contact) => contact.id !== action.payload
+        ),
+      };
+    }
     default:
       return state;
   }
