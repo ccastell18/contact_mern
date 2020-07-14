@@ -39,6 +39,8 @@ const ContactState = (props) => {
     ],
     //used for editing contact.  clicking on edit will enter contact info into state.
     current: null,
+    //new piece of state is needed to filter since state is already called
+    filtered: null,
   };
 
   //dispatch allows objects to be dispatched to the reducer
@@ -66,19 +68,26 @@ const ContactState = (props) => {
     dispatch({ type: UPDATE_CONTACT, payload: contact });
   };
   //filter contacts
-
+  const filterContacts = (text) => {
+    dispatch({ type: FILTER_CONTACTS, payload: text });
+  };
   //clear filter
-
+  const clearFilter = () => {
+    dispatch({ type: CLEAR_FILTER });
+  };
   return (
     <ContactContext.Provider
       value={{
         contacts: state.contacts,
         current: state.current,
+        filtered: state.filtered,
         addContact,
         deleteContact,
         clearCurrent,
         setCurrent,
         updateContact,
+        filterContacts,
+        clearFilter,
       }}>
       {props.children}
     </ContactContext.Provider>
