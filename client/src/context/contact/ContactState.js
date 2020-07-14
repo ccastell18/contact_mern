@@ -37,6 +37,8 @@ const ContactState = (props) => {
         type: 'professional',
       },
     ],
+    //used for editing contact.  clicking on edit will enter contact info into state.
+    current: null,
   };
 
   //dispatch allows objects to be dispatched to the reducer
@@ -52,9 +54,13 @@ const ContactState = (props) => {
     dispatch({ type: DELETE_CONTACT, payload: id });
   };
   //set Current Contact
-
+  const setCurrent = (id) => {
+    dispatch({ type: SET_CURRENT, payload: id });
+  };
   //Clear Current Contact
-
+  const clearCurrent = () => {
+    dispatch({ type: CLEAR_CURRENT });
+  };
   //update contact
 
   //filter contacts
@@ -65,8 +71,11 @@ const ContactState = (props) => {
     <ContactContext.Provider
       value={{
         contacts: state.contacts,
+        current: state.current,
         addContact,
         deleteContact,
+        clearCurrent,
+        setCurrent,
       }}>
       {props.children}
     </ContactContext.Provider>

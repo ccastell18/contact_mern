@@ -7,8 +7,8 @@ import ContactContext from '../../context/contact/contactContext';
 //pass in contact prop from Contacts Component
 const ContactItem = ({ contact }) => {
   const contactContext = useContext(ContactContext);
-  //pull the delete action
-  const { deleteContact } = contactContext;
+  //pull in actions from state
+  const { deleteContact, setCurrent, clearCurrent } = contactContext;
 
   //destructuring parts of the contact prop
   const { id, name, email, phone, type } = contact;
@@ -16,6 +16,7 @@ const ContactItem = ({ contact }) => {
   //calls deleteContact method from context and deletes using id
   const onDelete = () => {
     deleteContact(id);
+    clearCurrent();
   };
 
   return (
@@ -44,7 +45,11 @@ const ContactItem = ({ contact }) => {
         )}
       </ul>
       <p>
-        <button className='btn btn-dark btn-sm'>Edit</button>
+        <button
+          className='btn btn-dark btn-sm'
+          onClick={() => setCurrent(contact)}>
+          Edit
+        </button>
         <button className='btn btn-danger btn-sm' onClick={onDelete}>
           Delete
         </button>
