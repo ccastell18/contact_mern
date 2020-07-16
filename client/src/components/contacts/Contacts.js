@@ -9,12 +9,20 @@ const Contacts = () => {
   const contactContext = useContext(ContactContext);
   //Component now has access to state or actions from Context
   //destructure state
-  const { contacts } = contactContext;
+  const { contacts, filtered } = contactContext;
+
+  if (contacts.length === 0) {
+    return <h4>Please add a Contact</h4>;
+  }
   return (
     <Fragment>
-      {contacts.map((contact) => (
-        <ContactItem key={contact.id} contact={contact} />
-      ))}
+      {filtered !== null
+        ? filtered.map((contact) => (
+            <ContactItem key={contact.id} contact={contact} />
+          ))
+        : contacts.map((contact) => (
+            <ContactItem key={contact.id} contact={contact} />
+          ))}
     </Fragment>
   );
 };

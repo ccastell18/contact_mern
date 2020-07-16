@@ -1,12 +1,12 @@
-import React, { useContext, useRef, useEffect } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import ContactContext from '../../context/contact/contactContext';
-import { text } from 'express';
 
 const ContactFilter = () => {
   const contactContext = useContext(ContactContext);
-  // call the useRef Hook
   const text = useRef('');
-  const { filterContacts, clearFilter, filtered } = contactContext;
+
+  const { clearFilter, filterContacts, filtered } = contactContext;
+
   useEffect(() => {
     if (filtered === null) {
       text.current.value = '';
@@ -22,14 +22,16 @@ const ContactFilter = () => {
   };
 
   return (
-    <form>
-      <input
-        type='text'
-        ref={text}
-        placeholder='Filter Contacts'
-        onChange={onChange}
-      />
-    </form>
+    <div>
+      <form>
+        <input
+          ref={text}
+          type='text'
+          placeholder='Filter Contacts...'
+          onChange={onChange}
+        />
+      </form>
+    </div>
   );
 };
 
