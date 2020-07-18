@@ -45,7 +45,7 @@ router.post(
       //checking if email exists
       let user = await User.findOne({ email });
       if (!user) {
-        return res.status(400).json({ msg: 'Invalid credentails' });
+        return res.status(400).json({ msg: 'Invalid Credentails' });
       }
       //checking if password matches
       const isMatch = await bcrypt.compare(password, user.password);
