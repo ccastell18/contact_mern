@@ -8,6 +8,7 @@ import {
   LOGOUT,
   CLEAR_ERRORS,
 } from '../types';
+import AuthState from './AuthState';
 
 export default (state, action) => {
   switch (action.type) {
@@ -20,6 +21,7 @@ export default (state, action) => {
         loading: false,
       };
     case REGISTER_FAIL:
+    case AUTH_ERROR:
       localStorage.removeItem('token');
       return {
         ...state,
@@ -29,11 +31,19 @@ export default (state, action) => {
         user: null,
         error: action.payload,
       };
+    case USER_LOADED:
+      return {
+        ...state,
+        isAuthenticated: true,
+        loading: false,
+        user: action.payload,
+      };
     case CLEAR_ERRORS:
       return {
         ...state,
         error: null,
       };
+
     default:
       return state;
   }
