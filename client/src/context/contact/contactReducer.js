@@ -31,7 +31,7 @@ export default (state, action) => {
         //use filter to remove id. Filter takes in a function
         //returns all ids that are not from the ContactState method.
         contacts: state.contacts.filter(
-          (contact) => contact.id !== action.payload
+          (contact) => contact._id !== action.payload
         ),
         loading: false,
       };
